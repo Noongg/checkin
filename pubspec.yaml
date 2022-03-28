@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   firebase_messaging: ^11.2.0
-  camera: ^0.9.4+5
+  camera: ^0.9.4+17
   geolocator: ^8.0.0
   geocoding: ^2.0.1
   google_maps_flutter: ^2.1.1
@@ -52,9 +52,9 @@ flutter_native_splash:
   # flutter pub run flutter_native_splash:create
   # flutter pub run flutter_native_splash:remove
 
-  color: "#40BFFF"
+  color: "#FFFFFF"
   #background_image: "assets/background.png"
-  image: assets/images/iconApp.png
+  image: assets/images/logo.png
 
   # This property allows you to specify an image used as branding in the splash screen. It must be
   # a png file. Currently, it is only supported for Android and iOS.
@@ -81,7 +81,7 @@ flutter_native_splash:
   #       To show the notification bar, add the following code to your Flutter app:
   #       WidgetsFlutterBinding.ensureInitialized();
   #       SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  fullscreen: true
+  #fullscreen: true
 
   # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
   # with the info_plist_files parameter.  Remove only the # characters in the three lines below,

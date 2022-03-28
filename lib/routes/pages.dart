@@ -1,29 +1,33 @@
 import 'package:check_in/routes/routes.dart';
 import 'package:get/get.dart';
 
+import '../bindings/camera_bindings.dart';
+import '../bindings/checkin_binding.dart';
+import '../bindings/login_binding.dart';
+import '../pages/auth/login_page.dart';
+import '../pages/camera/camera_page.dart';
+import '../pages/home/home.dart';
+
 class Pages {
   static final pages = [
-    //
-    // GetPage(
-    //   name: Routes.REGISTER_PAGE,
-    //   page: () => const Register(),
-    // ),
-    // GetPage(
-    //   name: Routes.LOGIN_PAGE,
-    //   page: () => const LoginPage(),
-    //   binding: LoginBinding(),
-    // ),
-    // GetPage(
-    //   name: Routes.VERIFICATION,
-    //   page: () => const Verification(),
-    //   transition: Transition.cupertinoDialog,
-    // ),
-    // GetPage(
-    //   name: Routes.HOME_NAVIGATE,
-    //   page: () => const HomeNavigate(),
-    //   binding: HomeNavBinding(),
-    //   transition: Transition.cupertinoDialog,
-    // ),
+
+    GetPage(
+      name: Routes.CAMERAPAGE,
+      page: () => const CameraPage(),
+      binding: CameraBindings(),
+      transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: Routes.LOGIN_PAGE,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: Routes.HOMEPAGE,
+      binding: CheckInBindings(),
+      page: () => HomePage(),
+      transition: Transition.cupertinoDialog,
+    ),
     // GetPage(
     //   name: Routes.TIMESHEETS,
     //   page: () => const TimeSheets(),
