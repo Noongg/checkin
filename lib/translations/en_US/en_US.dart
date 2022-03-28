@@ -1,0 +1,27 @@
+// ignore_for_file: file_names
+
+final Map<String, String> enUS = {
+  "sign_in": "Đăng nhập",
+  "sign_up": "Đăng ký",
+  "username":"Username",
+  "email":"Email",
+  "full_name":"Full name",
+  "password": "Password",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot password?",
+  "don't_have_an_account": "Chưa có tài khoản?",
+  "confirm_password": "Nhập lại mật khẩu",
+  "subscribed_email": "Nhận tin tức và các thông tin dự án qua email",
+  "agree_rules_1": "Tôi đã đọc và chấp nhận ",
+  "agree_rules_2": "Thỏa thuận dịch vụ",
+  "already_have_an_account":"Đã có tài khoản?",
+  "not_enter_email_yet":"Bạn chưa nhập email",
+  "not_enter_password_yet":"Bạn chưa nhập mật khẩu",
+  "not_enter_full_name_yet":"Bạn chưa nhập họ tên",
+  "not_enter_username_yet":"Bạn chưa nhập tên tài khoản",
+  "password_not_match":"Mật khẩu không trùng khớp",
+  "password_invalid":"Mật khẩu không đúng định dạng",
+  "email_invalid":"Email không đúng định dạng",
+  "username_invalid":"Tối thiểu 3 kí tự, gồm chữ thường và số",
+  "full_name_invalid":"Họ tên phải có ít nhất 3 ký tự",
+};
