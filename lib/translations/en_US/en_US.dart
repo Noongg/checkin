@@ -24,4 +24,7 @@ final Map<String, String> enUS = {
   "email_invalid":"Email không đúng định dạng",
   "username_invalid":"Tối thiểu 3 kí tự, gồm chữ thường và số",
   "full_name_invalid":"Họ tên phải có ít nhất 3 ký tự",
+  "error":"Error",
+  "device_not_found":"Device not found",
+  "device_not_supported":"Device not supported"
 };

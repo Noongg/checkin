@@ -13,7 +13,6 @@ import '../../widgets/buttons.dart';
 import '../../widgets/round_checkbox_widget.dart';
 import '../../widgets/text_field_widget.dart';
 
-
 class LoginPage extends GetWidget<LoginController> {
   final LoginController _loginController = Get.find();
 
@@ -76,9 +75,9 @@ class LoginPage extends GetWidget<LoginController> {
                                 child: SingleChildScrollView(
                                   padding: EdgeInsets.only(
                                       top: MediaQuery.of(context)
-                                          .viewInsets
-                                          .bottom >
-                                          30
+                                                  .viewInsets
+                                                  .bottom >
+                                              30
                                           ? 100
                                           : 0),
                                   child: Column(
@@ -93,19 +92,23 @@ class LoginPage extends GetWidget<LoginController> {
                                       ),
                                       Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             children: [
                                               GetBuilder(
-                                                builder: (LoginController controller) => RoundCheckBoxWidget(
-                                                    width: 20,
-                                                    height: 20,
-                                                    onChange: (bool? value) {
-                                                      controller
-                                                          .updateIsChecked();
-                                                    },
-                                                    value: controller.isChecked),
+                                                builder: (LoginController
+                                                        controller) =>
+                                                    RoundCheckBoxWidget(
+                                                        width: 20,
+                                                        height: 20,
+                                                        onChange:
+                                                            (bool? value) {
+                                                          controller
+                                                              .updateIsChecked();
+                                                        },
+                                                        value: controller
+                                                            .isChecked),
                                               ),
                                               const SizedBox(
                                                 width: 10,
@@ -116,57 +119,58 @@ class LoginPage extends GetWidget<LoginController> {
                                                     fontSize: 12,
                                                     color: Color(0xFF77828F),
                                                     fontWeight:
-                                                    FontWeight.w500),
+                                                        FontWeight.w500),
                                               ),
                                             ],
                                           ),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Text(
+                                              " ${StringUtils.forgot_password.tr}",
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                                color: ColorUtils.primaryColor,
+                                              ),
+                                            ),
+                                          )
                                         ],
                                       ),
                                       const SizedBox(
                                         height: 25,
                                       ),
-                                      Center(
-                                        child: ButtonWidget(
-                                          title: StringUtils.sign_in.tr,
-                                          height: 40,
-                                          onTap: (){},
-                                        ),
+                                      Row(
+                                        children: [
+                                          Flexible(
+                                            child: ButtonWidget(
+                                              title: StringUtils.sign_in.tr,
+                                              height: 40,
+                                              onTap: () {},
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () async {
+                                              await _loginController
+                                                  .checkAuthBiometrics();
+                                            },
+                                            child: const Icon(
+                                              Icons.fingerprint,
+                                              color: ColorUtils.primaryColor,
+                                              size: 35,
+                                            ),
+                                          )
+                                        ],
                                       ),
                                       const SizedBox(
                                         height: 24,
                                       ),
-                                      Center(
-                                        child: RichText(
-                                          text: TextSpan(
-                                              text: StringUtils
-                                                  .dont_have_an_account.tr,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                                color: Color(0xff202832),
-                                              ),
-                                              children: [
-                                                TextSpan(
-                                                    text:
-                                                    " ${StringUtils.sign_up.tr}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                      FontWeight.w400,
-                                                      color: ColorUtils.primaryColor,
-                                                    ),
-                                                    recognizer:
-                                                    TapGestureRecognizer()
-                                                      ..onTap = () {
-
-                                                      }),
-                                              ]),
-                                        ),
-                                      )
                                     ],
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -176,26 +180,27 @@ class LoginPage extends GetWidget<LoginController> {
                 ),
               ),
               AnimatedBuilder(
-                  animation: animationLoginController.animationController!,
-                  builder: (context, child) {
-                    return Positioned(
-                      left: 0,
-                      right: 0,
-                      top: animationLoginController.transitionAnimation!.value -
-                          MediaQuery.of(context).viewInsets.bottom,
-                      child: Transform.scale(
-                        scale: animationLoginController.scaleAnimation!.value,
-                        child: Opacity(
-                          opacity: animationLoginController.fadeAnimation!.value,
-                          child: SvgPicture.asset(
-                            IconUtils.icLogo,
-                            height: 41,
-                            color: animationLoginController.colorAnimation!.value,
-                          ),
+                animation: animationLoginController.animationController!,
+                builder: (context, child) {
+                  return Positioned(
+                    left: 0,
+                    right: 0,
+                    top: animationLoginController.transitionAnimation!.value -
+                        MediaQuery.of(context).viewInsets.bottom,
+                    child: Transform.scale(
+                      scale: animationLoginController.scaleAnimation!.value,
+                      child: Opacity(
+                        opacity: animationLoginController.fadeAnimation!.value,
+                        child: SvgPicture.asset(
+                          IconUtils.icLogo,
+                          height: 41,
+                          color: animationLoginController.colorAnimation!.value,
                         ),
                       ),
-                    );
-                  }),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),

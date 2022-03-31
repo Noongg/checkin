@@ -24,4 +24,7 @@ class StringUtils {
   static String email_invalid = "email_invalid";
   static String username_invalid = "username_invalid";
   static String full_name_invalid = "full_name_invalid";
+  static String error = "error";
+  static String device_not_found = "device_not_found";
+  static String device_not_supported = "device_not_supported";
 }

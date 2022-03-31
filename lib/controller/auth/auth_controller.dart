@@ -1,5 +1,4 @@
 import 'package:check_in/helper/storage_helper.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 

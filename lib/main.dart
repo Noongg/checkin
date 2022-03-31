@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       initialRoute: _controller.isLogin ? Routes.HOMEPAGE : Routes.LOGIN_PAGE,
       initialBinding: LoginBinding(),
       getPages: Pages.pages,
-      locale: const Locale('en', 'US'),
+      locale: const Locale('vi', 'VN'),
       translationsKeys: Translation.translations,
     );
   }
