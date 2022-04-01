@@ -3,6 +3,7 @@
 class Routes {
   static const CAMERAPAGE = "/camera";
   static const LOGIN_PAGE = "/login";
+  static const RESGISTER_PAGE = "/register";
   static const CHECK_IN = "/checkin";
   static const HOMEPAGE = "/homepage";
   static const TIMESHEETS = "/timesheets";

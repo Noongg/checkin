@@ -1,3 +1,5 @@
+import 'package:check_in/bindings/register_binding.dart';
+import 'package:check_in/pages/auth/register_page.dart';
 import 'package:check_in/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -28,9 +30,10 @@ class Pages {
       page: () => HomePage(),
       transition: Transition.cupertinoDialog,
     ),
-    // GetPage(
-    //   name: Routes.TIMESHEETS,
-    //   page: () => const TimeSheets(),
-    // ),
+    GetPage(
+      name: Routes.RESGISTER_PAGE,
+      binding: RegisterBinding(),
+      page: () => RegisterPage(),
+    ),
   ];
 }

@@ -14,20 +14,24 @@ class TextFieldWidget extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final double? marginTitle;
   final Color? borderColor;
+  final FocusNode? focusNode;
+  final Key? globalKey;
 
   const TextFieldWidget(
       {Key? key,
-      this.title,
-      this.isRequired = false,
-      this.hintText,
-      this.obscureText = false,
-      this.validator,
-      required this.controller,
-      this.onChanged,
-      this.titleStyle,
-      this.contentPadding,
-      this.marginTitle,
-      this.borderColor})
+        this.globalKey,
+        this.title,
+        this.isRequired = false,
+        this.hintText,
+        this.obscureText = false,
+        this.validator,
+        required this.controller,
+        this.onChanged,
+        this.titleStyle,
+        this.contentPadding,
+        this.marginTitle,
+        this.borderColor,
+        this.focusNode})
       : super(key: key);
 
   @override
@@ -66,6 +70,9 @@ class TextFieldWidget extends StatelessWidget {
           height: marginTitle ?? 5,
         ),
         TextFormField(
+          key: globalKey,
+          autofocus: true,
+          focusNode: focusNode,
           obscureText: obscureText,
           onChanged: onChanged,
           decoration: InputDecoration(

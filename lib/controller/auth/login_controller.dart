@@ -1,45 +1,47 @@
+import 'package:check_in/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/strings.dart';
 import '../../widgets/loading_widget.dart';
 
-enum SupportState {
-  unknown,
-  supported,
-  unsupported,
-}
-
 class LoginController extends GetxController {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool hidePassWord = true;
   bool isChecked = false;
 
-  SupportState supportState = SupportState.unknown;
-  bool? canCheckBiometrics;
-  bool? authenticated;
+  void firebaseLogin() async {
+    if (formKey.currentState!.validate()) {
+      Get.dialog(const LoadingWidget());
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text
+        );
 
-  // void apiLogin() async {
-  //   if (formKey.currentState!.validate()) {
-  //     Get.dialog(const LoadingWidget());
-  //     bool result = await AuthRepository.login(
-  //       username: usernameController.text,
-  //       password: passwordController.text,
-  //     );
-  //     if (result) {
-  //       Get.offAllNamed(Routes.HOMEPAGE);
-  //     } else {
-  //       Get.snackbar("Lỗi", "Sai tên đăng nhập hoặc mật khẩu");
-  //       Get.back();
-  //     }
-  //   }
-  // }
+        print(userCredential.user!.email);
+        print(userCredential.user!.displayName);
+        print(userCredential.user!.getIdToken().toString());
+
+        // Get.offAllNamed(Routes.HOMEPAGE);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          Get.back();
+          Get.snackbar("Lỗi", "No user found for that email.");
+        } else if (e.code == 'wrong-password') {
+          Get.back();
+          Get.snackbar("Lỗi", "Wrong password provided for that user.");
+        }
+      }
+    }
+  }
 
   @override
   void onClose() {
-    usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.onClose();
   }
@@ -57,16 +59,18 @@ class LoginController extends GetxController {
   void updateIsChecked() {
     if (isChecked == false) {
       isChecked = true;
-      update();
     } else {
       isChecked = false;
-      update();
     }
+    update(['isChecked']);
   }
 
-  String? validateUserName(String? value) {
+  String? validateEmail(String? value) {
     if (GetUtils.isNullOrBlank(value)!) {
-      return StringUtils.not_enter_username_yet.tr;
+      return StringUtils.not_enter_email_yet.tr;
+    }
+    if (!GetUtils.isEmail(value!)) {
+      return StringUtils.email_invalid.tr;
     }
     return null;
   }

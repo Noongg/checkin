@@ -1,10 +1,9 @@
-import 'package:check_in/controller/auth/animation_login_controller.dart';
 import 'package:check_in/routes/pages.dart';
 import 'package:check_in/routes/routes.dart';
 import 'package:check_in/translations/translation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,7 +16,7 @@ import 'controller/controller_time.dart';
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-//  await Firebase.initializeApp();
+  await Firebase.initializeApp();
   if (defaultTargetPlatform == TargetPlatform.android) {
     AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
   }

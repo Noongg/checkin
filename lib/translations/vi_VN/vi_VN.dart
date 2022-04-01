@@ -23,7 +23,7 @@ final Map<String, String> viVN = {
   "password_invalid":"Mật khẩu không đúng định dạng",
   "email_invalid":"Email không đúng định dạng",
   "username_invalid":"Tối thiểu 3 kí tự, gồm chữ thường và số",
-  "full_name_invalid":"Họ tên phải có ít nhất 3 ký tự",
+  "full_name_invalid":"Họ tên phải có ít nhất 10 ký tự",
   "error":"Lỗi",
   "device_not_found":"Không tìm thấy thiết bị",
   "device_not_supported":"Thiết bị không hỗ trợ"

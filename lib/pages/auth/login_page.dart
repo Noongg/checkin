@@ -1,13 +1,14 @@
+import 'package:check_in/controller/auth/animation_login_controller.dart';
+import 'package:check_in/controller/auth/login_controller.dart';
+import 'package:check_in/utils/icons.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../controller/auth/animation_login_controller.dart';
-import '../../controller/auth/login_controller.dart';
+
 import '../../routes/routes.dart';
 import '../../utils/color_utils.dart';
-import '../../utils/icons.dart';
 import '../../utils/strings.dart';
 import '../../widgets/buttons.dart';
 import '../../widgets/round_checkbox_widget.dart';
@@ -20,13 +21,13 @@ class LoginPage extends GetWidget<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.dark,
-          statusBarColor: Colors.transparent),
-      child: Scaffold(
-        body: GetBuilder<AnimationLoginController>(
-          builder: (AnimationLoginController animationLoginController) => Stack(
+    return Scaffold(
+      body: GetBuilder<AnimationLoginController>(
+        builder: (AnimationLoginController animationLoginController) => GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Stack(
             children: [
               SizedBox(
                 height: Get.height,
@@ -44,7 +45,7 @@ class LoginPage extends GetWidget<LoginController> {
               ),
               AnimatedBuilder(
                 animation: animationLoginController.animationController!,
-                builder: (context, child) => Positioned(
+                builder: (contextAnimation, child) => Positioned(
                   bottom: 0,
                   child: Opacity(
                     opacity: animationLoginController.formFadeAnimation!.value,
@@ -75,82 +76,79 @@ class LoginPage extends GetWidget<LoginController> {
                                 child: SingleChildScrollView(
                                   padding: EdgeInsets.only(
                                       top: MediaQuery.of(context)
-                                                  .viewInsets
-                                                  .bottom >
-                                              30
+                                          .viewInsets
+                                          .bottom >
+                                          30
                                           ? 100
                                           : 0),
                                   child: Column(
                                     children: [
-                                      _userNameField(),
+                                      _emailField(),
                                       const SizedBox(
                                         height: 25,
                                       ),
                                       _passwordField(),
                                       const SizedBox(
-                                        height: 30,
+                                        height: 40,
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              GetBuilder(
-                                                builder: (LoginController
-                                                        controller) =>
-                                                    RoundCheckBoxWidget(
-                                                        width: 20,
-                                                        height: 20,
-                                                        onChange:
-                                                            (bool? value) {
-                                                          controller
-                                                              .updateIsChecked();
-                                                        },
-                                                        value: controller
-                                                            .isChecked),
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                StringUtils.remember_me.tr,
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    color: Color(0xFF77828F),
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {},
-                                            child: Text(
-                                              " ${StringUtils.forgot_password.tr}",
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                                color: ColorUtils.primaryColor,
-                                              ),
-                                            ),
-                                          )
-                                        ],
+                                      Center(
+                                        child: ButtonWidget(
+                                          title: StringUtils.sign_in.tr,
+                                          height: 40,
+                                          onTap: controller.firebaseLogin,
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 25,
                                       ),
-                                      ButtonWidget(
-                                        title: StringUtils.sign_in.tr,
-                                        height: 40,
-                                        onTap: () {},
+                                      Center(
+                                        child: RichText(
+                                          text: TextSpan(
+                                              text: StringUtils
+                                                  .dont_have_an_account.tr,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color(0xff202832),
+                                              ),
+                                              children: [
+                                                TextSpan(
+                                                    text:
+                                                    " ${StringUtils.sign_up.tr}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                      FontWeight.w400,
+                                                      color: ColorUtils.primaryColor,
+                                                    ),
+                                                    recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        Get.toNamed(Routes
+                                                            .RESGISTER_PAGE);
+                                                      }),
+                                              ]),
+                                        ),
                                       ),
                                       const SizedBox(
-                                        height: 24,
+                                        height: 25,
                                       ),
+                                      Center(
+                                        child: GestureDetector(
+                                          child: Text(
+                                            StringUtils.forgot_password.tr,
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                color: ColorUtils.primaryColor),
+                                          ),
+                                          onTap: () {},
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -160,27 +158,26 @@ class LoginPage extends GetWidget<LoginController> {
                 ),
               ),
               AnimatedBuilder(
-                animation: animationLoginController.animationController!,
-                builder: (context, child) {
-                  return Positioned(
-                    left: 0,
-                    right: 0,
-                    top: animationLoginController.transitionAnimation!.value -
-                        MediaQuery.of(context).viewInsets.bottom,
-                    child: Transform.scale(
-                      scale: animationLoginController.scaleAnimation!.value,
-                      child: Opacity(
-                        opacity: animationLoginController.fadeAnimation!.value,
-                        child: SvgPicture.asset(
-                          IconUtils.icLogo,
-                          height: 41,
-                          color: animationLoginController.colorAnimation!.value,
+                  animation: animationLoginController.animationController!,
+                  builder: (_, child) {
+                    return Positioned(
+                      left: 0,
+                      right: 0,
+                      top: animationLoginController.transitionAnimation!.value -
+                          MediaQuery.of(context).viewInsets.bottom,
+                      child: Transform.scale(
+                        scale: animationLoginController.scaleAnimation!.value,
+                        child: Opacity(
+                          opacity: animationLoginController.fadeAnimation!.value,
+                          child: SvgPicture.asset(
+                            IconUtils.icLogo,
+                            height: 41,
+                            color: animationLoginController.colorAnimation!.value,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  }),
             ],
           ),
         ),
@@ -188,13 +185,13 @@ class LoginPage extends GetWidget<LoginController> {
     );
   }
 
-  Widget _userNameField() {
+  Widget _emailField() {
     return TextFieldWidget(
-      title: StringUtils.username.tr,
-      controller: _loginController.usernameController,
+      title: StringUtils.email.tr,
+      controller: _loginController.emailController,
       hintText: "deniel123@gmail.com",
       isRequired: true,
-      validator: _loginController.validateUserName,
+      validator: _loginController.validateEmail,
     );
   }
 
