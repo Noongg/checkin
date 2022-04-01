@@ -139,30 +139,10 @@ class LoginPage extends GetWidget<LoginController> {
                                       const SizedBox(
                                         height: 25,
                                       ),
-                                      Row(
-                                        children: [
-                                          Flexible(
-                                            child: ButtonWidget(
-                                              title: StringUtils.sign_in.tr,
-                                              height: 40,
-                                              onTap: () {},
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          GestureDetector(
-                                            onTap: () async {
-                                              await _loginController
-                                                  .checkAuthBiometrics();
-                                            },
-                                            child: const Icon(
-                                              Icons.fingerprint,
-                                              color: ColorUtils.primaryColor,
-                                              size: 35,
-                                            ),
-                                          )
-                                        ],
+                                      ButtonWidget(
+                                        title: StringUtils.sign_in.tr,
+                                        height: 40,
+                                        onTap: () {},
                                       ),
                                       const SizedBox(
                                         height: 24,
