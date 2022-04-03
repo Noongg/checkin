@@ -102,38 +102,6 @@ class RegisterPage extends StatelessWidget {
                                         borderColorInActive:
                                         const Color(0xffDBDFE5),
                                         onChange: (bool? value) {
-                                          controller.updateIsReceiveMail();
-                                        },
-                                        value: controller.isCheckedReceiveMail,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          StringUtils.subscribed_email.tr,
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF1C1C24),
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      RoundCheckBoxWidget(
-                                        width: 22,
-                                        height: 22,
-                                        colorInActive: const Color(0xffDBDFE5),
-                                        borderColorInActive:
-                                        const Color(0xffDBDFE5),
-                                        onChange: (bool? value) {
                                           controller.updateIsAgreeTerm();
                                         },
                                         value: controller.isCheckedAgreeTerm,
