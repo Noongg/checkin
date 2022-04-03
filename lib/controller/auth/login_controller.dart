@@ -1,5 +1,4 @@
-import 'package:check_in/routes/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:check_in/helper/firebase_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,26 +15,9 @@ class LoginController extends GetxController {
   void firebaseLogin() async {
     if (formKey.currentState!.validate()) {
       Get.dialog(const LoadingWidget());
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: emailController.text,
-            password: passwordController.text
-        );
-
-        print(userCredential.user!.email);
-        print(userCredential.user!.displayName);
-        print(userCredential.user!.getIdToken().toString());
-
-        // Get.offAllNamed(Routes.HOMEPAGE);
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          Get.back();
-          Get.snackbar("Lỗi", "No user found for that email.");
-        } else if (e.code == 'wrong-password') {
-          Get.back();
-          Get.snackbar("Lỗi", "Wrong password provided for that user.");
-        }
-      }
+      FirebaseHelper.loginFirebase(
+          email: emailController.text,
+          password: passwordController.text);
     }
   }
 

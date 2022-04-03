@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:check_in/helper/firebase_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -12,10 +12,10 @@ class RegisterController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  FocusNode fullNameFocusNode =FocusNode();
-  FocusNode emailFocusNode=FocusNode();
-  FocusNode passwordFocusNode=FocusNode();
-  FocusNode confirmPasswordFocusNode=FocusNode();
+  FocusNode fullNameFocusNode = FocusNode();
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+  FocusNode confirmPasswordFocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   final fullNameKey = GlobalKey<FormFieldState>();
   final emailKey = GlobalKey<FormFieldState>();
@@ -24,7 +24,7 @@ class RegisterController extends GetxController {
   bool hidePassWord = true;
   bool isCheckedReceiveMail = false;
   bool isCheckedAgreeTerm = false;
-  bool ischeckInternet = false;
+  bool isCheckInternet = false;
   List<VerifyPass> listVerifyPass = [
     VerifyPass(label: "Có chữ thường"),
     VerifyPass(label: "Có chữ số"),
@@ -35,28 +35,12 @@ class RegisterController extends GetxController {
 
   void firebaseSignUp() async {
     if (formKey.currentState!.validate()) {
-      Get.dialog(const LoadingWidget());{
-        FirebaseAuth auth = FirebaseAuth.instance;
-        User? user;
-        try {
-          UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+      Get.dialog(const LoadingWidget());
+      {
+        FirebaseHelper.registerFirebase(
+            name: fullNameController.text,
             email: emailController.text,
-            password: passwordController.text,
-          );
-          user = userCredential.user;
-          // await user!.sendEmailVerification();
-          await user!.updateDisplayName(fullNameController.text);
-          await user.reload();
-          user = auth.currentUser;
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'weak-password') {
-            Get.back();
-            Get.snackbar("Lỗi", "The password provided is too weak.");
-          } else if (e.code == 'email-already-in-use') {
-            Get.back();
-            Get.snackbar("Lỗi", "The account already exists for that email.");
-          }
-        }
+            password: passwordController.text);
       }
     }
   }
@@ -92,8 +76,8 @@ class RegisterController extends GetxController {
 
   void checkInternet() {
     InternetConnectionChecker().onStatusChange.listen((event) {
-      ischeckInternet = event == InternetConnectionStatus.connected;
-      if (ischeckInternet == false) {
+      isCheckInternet = event == InternetConnectionStatus.connected;
+      if (isCheckInternet == false) {
         Get.snackbar('Thông báo', 'Mất mạng');
       }
       update();
@@ -203,7 +187,6 @@ class RegisterController extends GetxController {
     }
     return null;
   }
-
 }
 
 class VerifyPass {
